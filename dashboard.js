@@ -1,22 +1,27 @@
-// Cargar nombre de finca
 const user = JSON.parse(localStorage.getItem('usuarioActual'));
 if (!user) window.location.href = "index.html";
 document.getElementById("nombreFinca").textContent = `Finca: ${user.finca}`;
 
 function cerrarSesion() {
-  localStorage.removeItem('usuarioActual');
+  localStorage.removeItem("usuarioActual");
   window.location.href = "index.html";
 }
 
-function generarDatosAleatorios(etiquetas, min, max) {
-  return etiquetas.map(() => +(Math.random() * (max - min) + min).toFixed(2));
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("show");
 }
 
+let chart = null;
+let intervalID = null;
+
 function mostrarEstacion(tipo) {
+  clearInterval(intervalID);
+
   const contenedor = document.getElementById("datosEstacion");
   contenedor.innerHTML = "";
 
-  let titulo, etiquetas, unidades;
+  let titulo, etiquetas;
 
   if (tipo === "porcino") {
     titulo = "Corral Porcino";
@@ -29,42 +34,58 @@ function mostrarEstacion(tipo) {
     etiquetas = ["Temp. Agua (°C)", "Oxígeno disuelto (mg/L)", "TDS (ppm)", "pH Agua"];
   }
 
-  const datos = generarDatosAleatorios(etiquetas, 10, 100);
-
-  const htmlDatos = etiquetas.map((et, i) =>
-    `<p><strong>${et}:</strong> ${datos[i]}</p>`
-  ).join("");
-
   const canvasId = `grafico-${tipo}`;
   contenedor.innerHTML = `
     <h2>${titulo}</h2>
-    ${htmlDatos}
+    <div id="valores"></div>
     <canvas id="${canvasId}"></canvas>
   `;
 
-new Chart(document.getElementById(canvasId), {
-  type: "line", // ← antes era "bar"
-  data: {
-    labels: etiquetas,
-    datasets: [{
-      label: `Valores de ${titulo}`,
-      data: datos,
-      borderColor: "#388e3c",
-      backgroundColor: "rgba(56, 142, 60, 0.2)",
-      fill: true,
-      tension: 0.3,
-    }],
-  },
-  options: {
-    responsive: true,
-    scales: {
-      y: { beginAtZero: true }
-    }
-  }
-});
+  const valoresDiv = document.getElementById("valores");
+  const colores = ["#4caf50", "#ffeb3b", "#795548", "#8bc34a"];
 
-  function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("show");
+  const datasets = etiquetas.map((et, i) => ({
+    label: et,
+    data: Array(10).fill(0).map(() => randomValor()),
+    borderColor: colores[i % colores.length],
+    fill: false,
+    tension: 0.3
+  }));
+
+  chart = new Chart(document.getElementById(canvasId), {
+    type: "line",
+    data: {
+      labels: Array.from({ length: 10 }, (_, i) => `-${10 - i}s`),
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      animation: false,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+
+  function actualizarDatos() {
+    valoresDiv.innerHTML = "";
+
+    datasets.forEach((ds, index) => {
+      const nuevo = randomValor();
+      ds.data.push(nuevo);
+      if (ds.data.length > 10) ds.data.shift();
+
+      valoresDiv.innerHTML += `<p><strong>${etiquetas[index]}:</strong> ${nuevo}</p>`;
+    });
+
+    chart.update();
+  }
+
+  actualizarDatos();
+  intervalID = setInterval(actualizarDatos, 5000);
 }
+
+function randomValor() {
+  return +(Math.random() * 100).toFixed(2);
 }
+

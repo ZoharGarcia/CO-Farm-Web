@@ -89,52 +89,53 @@ p {
   margin-top: 10px;
 }
 
-/* ---- NAVBAR ---- */
-
+/* ---- NAVBAR 3 COLUMNAS ---- */
 .navbar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  background-color: var(--verde);
-  color: var(--blanco);
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  padding: 15px 20px;
 }
 
-.navbar-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1000px;
-  align-items: center;
-  margin-top: 0.5rem;
+.header-left, .header-center, .header-right {
+  flex: 1;
+}
+
+.header-left {
+  text-align: left;
+}
+
+.header-center {
+  text-align: center;
+}
+
+.header-right {
+  text-align: right;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin: 0;
 }
 
-.farm-name,
-#nombreFinca {
-  font-size: 1rem;
+.farm-name {
+  color: #FFEB3B; /* Amarillo */
   font-weight: bold;
-  color: var(--amarillo);
+  font-size: 1.1rem;
 }
 
-.menu-btn,
 .hamburger {
   font-size: 1.5rem;
-  background: var(--cafe);
-  color: var(--blanco);
+  background: #6D4C41; /* Café */
+  color: white;
   border: none;
   border-radius: 5px;
-  padding: 0.3rem 0.8rem;
+  padding: 0.4rem 0.8rem;
   cursor: pointer;
 }
 
-.menu-btn:hover,
 .hamburger:hover {
   background-color: #5d4037;
 }

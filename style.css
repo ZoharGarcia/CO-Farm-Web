@@ -132,19 +132,26 @@ p {
   white-space: nowrap;
 }
 
+/* Botón hamburguesa */
 .hamburger {
-  font-size: 1.5rem;
-  background: var(--verde);
+  font-size: 1.2rem;
+  background: transparent;
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 0.4rem 0.8rem;
+  padding: 6px 10px;
+  margin-right: 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
 }
 
 .hamburger:hover {
-  background-color: #388e3c;
+  background-color: rgba(255, 255, 255, 0.15); /* resaltado */
 }
 
 /* SIDEBAR */

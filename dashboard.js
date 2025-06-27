@@ -42,23 +42,24 @@ function mostrarEstacion(tipo) {
     <canvas id="${canvasId}"></canvas>
   `;
 
-  new Chart(document.getElementById(canvasId), {
-    type: "bar",
-    data: {
-      labels: etiquetas,
-      datasets: [{
-        label: `Valores de ${titulo}`,
-        data: datos,
-        backgroundColor: ["#4caf50", "#ffeb3b", "#795548", "#8bc34a"],
-      }],
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+new Chart(document.getElementById(canvasId), {
+  type: "line", // ← antes era "bar"
+  data: {
+    labels: etiquetas,
+    datasets: [{
+      label: `Valores de ${titulo}`,
+      data: datos,
+      borderColor: "#388e3c",
+      backgroundColor: "rgba(56, 142, 60, 0.2)",
+      fill: true,
+      tension: 0.3,
+    }],
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: { beginAtZero: true }
     }
-  });
+  }
+});
 }

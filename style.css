@@ -58,36 +58,7 @@ header {
 
 .logo {
   font-size: 1.5em;
-  margin: 0;
-}
-
-.estaciones {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px;
-}
-
-.estaciones button {
-  padding: 10px 15px;
-  font-weight: bold;
-  background-color: #8bc34a;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #fff;
-}
-
-.estaciones button:hover {
-  background-color: #689f38;
-}
-
-#datosEstacion {
-  padding: 20px;
-}
-
-canvas {
-  max-width: 600px;
-  margin-top: 20px;
+  margin-left: 10px;
 }
 
 .hamburger {
@@ -124,4 +95,33 @@ canvas {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.estaciones {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.estaciones button {
+  padding: 10px 15px;
+  font-weight: bold;
+  background-color: #8bc34a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.estaciones button:hover {
+  background-color: #689f38;
+}
+
+#datosEstacion {
+  padding: 20px;
+}
+
+canvas {
+  max-width: 600px;
+  margin-top: 20px;
 }

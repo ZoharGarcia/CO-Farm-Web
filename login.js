@@ -12,7 +12,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     return;
   }
 
-  // Guardar sesión actual
   localStorage.setItem('usuarioActual', JSON.stringify(user));
   window.location.href = "dashboard.html";
 });

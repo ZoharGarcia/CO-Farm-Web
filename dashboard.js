@@ -12,7 +12,6 @@ function toggleSidebar() {
   sidebar.classList.toggle("show");
 }
 
-let chart = null;
 let intervalID = null;
 
 function mostrarEstacion(tipo) {
@@ -34,58 +33,68 @@ function mostrarEstacion(tipo) {
     etiquetas = ["Temp. Agua (°C)", "Oxígeno disuelto (mg/L)", "TDS (ppm)", "pH Agua"];
   }
 
-  const canvasId = `grafico-${tipo}`;
-  contenedor.innerHTML = `
-    <h2>${titulo}</h2>
-    <div id="valores"></div>
-    <canvas id="${canvasId}"></canvas>
-  `;
+  contenedor.innerHTML = `<h2>${titulo}</h2><div id="valores"></div>`;
 
   const valoresDiv = document.getElementById("valores");
-  const colores = ["#4caf50", "#ffeb3b", "#795548", "#8bc34a"];
 
-  const datasets = etiquetas.map((et, i) => ({
-    label: et,
-    data: Array(10).fill(0).map(() => randomValor()),
-    borderColor: colores[i % colores.length],
-    fill: false,
-    tension: 0.3
-  }));
-
-  chart = new Chart(document.getElementById(canvasId), {
-    type: "line",
-    data: {
-      labels: Array.from({ length: 10 }, (_, i) => `-${10 - i}s`),
-      datasets: datasets
-    },
-    options: {
-      responsive: true,
-      animation: false,
-      scales: {
-        y: { beginAtZero: true }
-      }
-    }
+  // Crear contenedores para cada variable
+  etiquetas.forEach((etiqueta, i) => {
+    const canvasId = `grafico-${tipo}-${i}`;
+    const valorId = `valor-${i}`;
+    valoresDiv.innerHTML += `
+      <div class="grafico-variable">
+        <p><strong>${etiqueta}:</strong> <span id="${valorId}">-</span></p>
+        <canvas id="${canvasId}"></canvas>
+      </div>
+    `;
   });
 
-  function actualizarDatos() {
-    valoresDiv.innerHTML = "";
-
-    datasets.forEach((ds, index) => {
-      const nuevo = randomValor();
-      ds.data.push(nuevo);
-      if (ds.data.length > 10) ds.data.shift();
-
-      valoresDiv.innerHTML += `<p><strong>${etiquetas[index]}:</strong> ${nuevo}</p>`;
+  const charts = etiquetas.map((etiqueta, i) => {
+    const canvas = document.getElementById(`grafico-${tipo}-${i}`);
+    return new Chart(canvas, {
+      type: "line",
+      data: {
+        labels: Array.from({ length: 10 }, (_, j) => `-${10 - j}s`),
+        datasets: [{
+          label: etiqueta,
+          data: Array(10).fill(0).map(() => randomValor()),
+          borderColor: colorVariable(i),
+          backgroundColor: "rgba(0,0,0,0)",
+          tension: 0.3,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: false,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
     });
+  });
 
-    chart.update();
+  function actualizar() {
+    charts.forEach((chart, i) => {
+      const nuevo = randomValor();
+      chart.data.datasets[0].data.push(nuevo);
+      if (chart.data.datasets[0].data.length > 10) {
+        chart.data.datasets[0].data.shift();
+      }
+      chart.update();
+      document.getElementById(`valor-${i}`).textContent = nuevo;
+    });
   }
 
-  actualizarDatos();
-  intervalID = setInterval(actualizarDatos, 5000);
+  actualizar();
+  intervalID = setInterval(actualizar, 5000);
 }
 
 function randomValor() {
   return +(Math.random() * 100).toFixed(2);
 }
 
+function colorVariable(i) {
+  const colores = ["#4caf50", "#ff9800", "#795548", "#2196f3", "#9c27b0", "#ff5722"];
+  return colores[i % colores.length];
+}

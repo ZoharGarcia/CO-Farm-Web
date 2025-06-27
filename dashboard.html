@@ -8,10 +8,14 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="dashboard">
+  <div class="sidebar" id="sidebar">
+    <button onclick="cerrarSesion()">Cerrar sesión</button>
+  </div>
+
   <header>
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
     <h1 class="logo">CO Farm Monitoring</h1>
     <div id="nombreFinca"></div>
-    <button onclick="cerrarSesion()">Cerrar sesión</button>
   </header>
 
   <main>
@@ -21,11 +25,10 @@
       <button onclick="mostrarEstacion('piscicultura')">Estación 3 - Piscicultura</button>
     </section>
 
-    <section id="datosEstacion">
-      <!-- Aquí se insertarán los datos dinámicamente -->
-    </section>
+    <section id="datosEstacion"></section>
   </main>
 
   <script src="dashboard.js"></script>
 </body>
+
 </html>

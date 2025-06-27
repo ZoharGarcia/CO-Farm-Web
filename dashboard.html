@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - CO Farm</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard">
+  <header>
+    <h1 class="logo">CO Farm Monitoring</h1>
+    <div id="nombreFinca"></div>
+    <button onclick="cerrarSesion()">Cerrar sesión</button>
+  </header>
+
+  <main>
+    <section class="estaciones">
+      <button onclick="mostrarEstacion('porcino')">Estación 1 - Corral Porcino</button>
+      <button onclick="mostrarEstacion('cultivo')">Estación 2 - Cultivos</button>
+      <button onclick="mostrarEstacion('piscicultura')">Estación 3 - Piscicultura</button>
+    </section>
+
+    <section id="datosEstacion">
+      <!-- Aquí se insertarán los datos dinámicamente -->
+    </section>
+  </main>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

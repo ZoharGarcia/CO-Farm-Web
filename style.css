@@ -20,7 +20,7 @@ body {
   line-height: 1.5;
 }
 
-/* ---- PÁGINAS DE LOGIN Y REGISTRO ---- */
+/* ---- LOGIN & REGISTRO ---- */
 
 .login-page, .register-page {
   display: flex;
@@ -89,59 +89,65 @@ p {
   margin-top: 10px;
 }
 
-/* ---- NAVBAR 3 COLUMNAS ---- */
+/* ---- NAVBAR ---- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #4CAF50; /* Verde */
+  background-color: var(--verde);
   color: white;
   padding: 15px 20px;
+  flex-wrap: wrap;
 }
 
-.header-left, .header-center, .header-right {
+.navbar-section {
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
-.header-left {
-  text-align: left;
+.logo-section {
+  justify-content: flex-start;
 }
 
-.header-center {
+.center-section {
+  justify-content: center;
   text-align: center;
 }
 
-.header-right {
-  text-align: right;
+.right-section {
+  justify-content: flex-end;
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .farm-name {
-  color: #FFEB3B; /* Amarillo */
+  color: var(--amarillo);
   font-weight: bold;
   font-size: 1.1rem;
+  white-space: nowrap;
 }
 
 .hamburger {
   font-size: 1.5rem;
-  background: #4CAF50; /* Café */
+  background: var(--verde);
   color: white;
   border: none;
   border-radius: 5px;
   padding: 0.4rem 0.8rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .hamburger:hover {
-  background-color: #4CAF50;
+  background-color: #388e3c;
 }
 
-/* ---- MENÚ LATERAL (SIDEBAR) ---- */
-
+/* SIDEBAR */
 .sidebar {
   position: fixed;
   top: 0;
@@ -219,7 +225,6 @@ p {
 }
 
 /* ---- DATOS ESTACIÓN ---- */
-
 #datosEstacion {
   margin-top: 2rem;
   width: 90%;
@@ -231,4 +236,42 @@ p {
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .farm-name {
+    font-size: 1rem;
+  }
+
+  .hamburger {
+    font-size: 1.3rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .navbar-section {
+    justify-content: center;
+  }
+
+  .logo-section {
+    order: 1;
+  }
+
+  .center-section {
+    order: 2;
+  }
+
+  .right-section {
+    order: 3;
+  }
 }

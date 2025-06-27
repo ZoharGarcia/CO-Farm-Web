@@ -10,16 +10,30 @@
   <header class="navbar">
     <h1 class="logo">CO FARM MONITORING</h1>
     <div class="navbar-content">
-      <span class="farm-name">Finca: Finca Morales</span>
-      <button class="menu-btn">&#9776;</button>
+      <span id="nombreFinca" class="farm-name">Finca: Morales</span>
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
     </div>
   </header>
 
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+    </ul>
+  </aside>
+
   <main class="dashboard">
-    <button class="station-btn">Estación 1 - Corral Porcino</button>
-    <button class="station-btn">Estación 2 - Cultivos</button>
-    <button class="station-btn">Estación 3 - Piscicultura</button>
+    <button class="station-btn" onclick="mostrarEstacion('porcino')">Estación 1 - Corral Porcino</button>
+    <button class="station-btn" onclick="mostrarEstacion('cultivo')">Estación 2 - Cultivos</button>
+    <button class="station-btn" onclick="mostrarEstacion('piscicultura')">Estación 3 - Piscicultura</button>
+
+    <section id="datosEstacion"></section>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
 

@@ -2,39 +2,24 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard - CO Farm</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="dashboard">
-
-  <div class="sidebar" id="sidebar">
-    <button onclick="cerrarSesion()">Cerrar sesión</button>
-  </div>
-
-  <header>
-    <div class="header-left">
-      <h1 class="logo">CO FARM MONITORING</h1>
-    </div>
-
-    <div class="header-center" id="nombreFinca">Finca: [Nombre]</div>
-
-    <div class="header-right">
-      <button class="hamburger" onclick="toggleSidebar()">☰</button>
+<body>
+  <header class="navbar">
+    <h1 class="logo">CO FARM MONITORING</h1>
+    <div class="navbar-content">
+      <span class="farm-name">Finca: Finca Morales</span>
+      <button class="menu-btn">&#9776;</button>
     </div>
   </header>
 
-  <main>
-    <section class="estaciones">
-      <button onclick="mostrarEstacion('porcino')">Estación 1 - Corral Porcino</button>
-      <button onclick="mostrarEstacion('cultivo')">Estación 2 - Cultivos</button>
-      <button onclick="mostrarEstacion('piscicultura')">Estación 3 - Piscicultura</button>
-    </section>
-
-    <section id="datosEstacion"></section>
+  <main class="dashboard">
+    <button class="station-btn">Estación 1 - Corral Porcino</button>
+    <button class="station-btn">Estación 2 - Cultivos</button>
+    <button class="station-btn">Estación 3 - Piscicultura</button>
   </main>
-
-  <script src="dashboard.js"></script>
 </body>
 </html>
+
